@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
   server: {
     port: 3000,
@@ -29,8 +29,10 @@ export default defineConfig({
     },
   },
   define: {
-    global: 'globalThis',
+    // Ensure API base URL is properly defined for production builds
+    __API_BASE_URL__: JSON.stringify(process.env.VITE_API_BASE_URL || 'https://ticketbariserver-7c08jpy6z-sayeda-anzuman-aras-projects.vercel.app/api'),
   },
+  envPrefix: 'VITE_', // Only expose VITE_ prefixed environment variables
   resolve: {
     alias: {
       'firebase/auth': 'firebase/auth',
@@ -39,4 +41,4 @@ export default defineConfig({
       'firebase/storage': 'firebase/storage',
     },
   },
-})
+}))
