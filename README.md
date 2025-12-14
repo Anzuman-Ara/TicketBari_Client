@@ -7,22 +7,22 @@
 
 TicketBari is a comprehensive online ticket booking platform built with the MERN stack. It allows users to search, book, and manage tickets for various transportation services including buses, trains, flights, and more.
 
+Live Site URL[https://ticketbari-b06fa.web.app/]
+
 ## 🚀 Features
 
 ### Core Features
 - **Multi-modal Transportation**: Book tickets for buses, trains, flights, launches, and ferries
 - **Real-time Search**: Find available routes and compare prices
-- **Secure Payment**: Integrated with Stripe and local payment methods (bKash, Nagad, Rocket)
+- **Secure Payment**: Integrated with Stripe (Stripe-hosted page)
 - **User Management**: Registration, authentication, and profile management
 - **Booking Management**: View, modify, and cancel bookings
 - **Admin Dashboard**: Comprehensive admin panel for route and booking management
 
 ### Advanced Features
 - **Dynamic Pricing**: Surge pricing during peak hours
-- **Real-time Notifications**: Email and push notifications for booking updates
 - **Analytics & Reports**: Detailed booking and revenue analytics
 - **Responsive Design**: Mobile-first responsive UI
-- **Multi-language Support**: English and Bengali language support
 - **Multi-currency Support**: BDT and USD currency options
 
 ## 🛠 Tech Stack
