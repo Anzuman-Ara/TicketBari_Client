@@ -32,6 +32,7 @@ jobs:
           # API configuration
           VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
           VITE_API_TIMEOUT: ${{ secrets.VITE_API_TIMEOUT }}
+          VITE_IMGBB_API_KEY: ${{ secrets.VITE_IMGBB_API_KEY }}
           
           # Environment configuration
           VITE_NODE_ENV: production
