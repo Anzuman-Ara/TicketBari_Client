@@ -98,7 +98,10 @@ const AddTicket = () => {
         })
       }, 200)
 
-      const response = await fetch('https://api.imgbb.com/1/upload?key=demo_key', {
+      // Check if we have a real API key
+      const apiKey = import.meta.env.VITE_IMGBB_API_KEY || 'demo_key'
+      
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
         method: 'POST',
         body: formData
       })
@@ -107,16 +110,42 @@ const AddTicket = () => {
       setUploadProgress(100)
 
       if (!response.ok) {
-        throw new Error('Image upload failed')
+        // If using demo key, return placeholder image
+        if (apiKey === 'demo_key') {
+          console.warn('Using demo key - returning placeholder image')
+          return 'https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=Ticket+Image'
+        }
+        
+        // For real API key failures, throw error
+        const errorData = await response.json()
+        throw new Error(errorData.error?.message || 'Image upload failed')
       }
 
       const data = await response.json()
       
-      // For demo purposes, return a placeholder URL
-      // In production, use actual imgbb response
+      // Return the actual uploaded image URL
+      if (data.data && data.data.url) {
+        return data.data.url
+      }
+      
+      // Fallback to placeholder if no URL returned
       return 'https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=Ticket+Image'
     } catch (error) {
       console.error('Image upload error:', error)
+      
+      // If using demo key, show info message instead of error
+      if (import.meta.env.VITE_IMGBB_API_KEY === 'demo_key') {
+        toast('Demo mode: Using placeholder image', {
+          icon: 'ℹ️',
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        })
+        return 'https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=Ticket+Image'
+      }
+      
       toast.error('Failed to upload image')
       throw error
     } finally {
