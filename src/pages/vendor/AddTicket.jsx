@@ -113,7 +113,7 @@ const AddTicket = () => {
         // If using demo key, return placeholder image
         if (apiKey === 'demo_key') {
           console.warn('Using demo key - returning placeholder image')
-          return 'https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=Ticket+Image'
+          return 'https://picsum.photos/400/250'
         }
         
         // For real API key failures, throw error
@@ -129,7 +129,7 @@ const AddTicket = () => {
       }
       
       // Fallback to placeholder if no URL returned
-      return 'https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=Ticket+Image'
+      return 'https://picsum.photos/400/250'
     } catch (error) {
       console.error('Image upload error:', error)
       
@@ -143,7 +143,7 @@ const AddTicket = () => {
             color: '#fff',
           },
         })
-        return 'https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=Ticket+Image'
+        return 'https://picsum.photos/400/250'
       }
       
       toast.error('Failed to upload image')

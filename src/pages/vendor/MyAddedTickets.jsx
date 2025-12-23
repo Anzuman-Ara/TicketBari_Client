@@ -91,7 +91,7 @@ const MyAddedTickets = () => {
           setUploadProgress(100)
           
           if (response.ok) {
-            imageUrl = 'https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=Updated+Ticket'
+            imageUrl = 'https://picsum.photos/400/250'
           }
         } catch (error) {
           console.error('Image upload error:', error)
