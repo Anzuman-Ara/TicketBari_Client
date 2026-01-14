@@ -23,9 +23,16 @@ const Login = () => {
   // Redirect if already logged in
   useEffect(() => {
     if (user) {
-      navigate(from, { replace: true });
+      // Redirect based on user role
+      if (user.role === 'vendor') {
+        navigate('/vendor/dashboard', { replace: true });
+      } else if (user.role === 'admin') {
+        navigate('/admin', { replace: true });
+      } else {
+        navigate('/dashboard', { replace: true });
+      }
     }
-  }, [user, navigate, from]);
+  }, [user, navigate]);
 
   // Validation function
   const validateForm = () => {
@@ -57,7 +64,14 @@ const Login = () => {
     try {
       const result = await login(formData.email, formData.password);
       if (result.success) {
-        navigate(from, { replace: true });
+        // Redirect based on user role
+        if (result.user.role === 'vendor') {
+          navigate('/vendor/dashboard', { replace: true });
+        } else if (result.user.role === 'admin') {
+          navigate('/admin', { replace: true });
+        } else {
+          navigate('/dashboard', { replace: true });
+        }
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -72,7 +86,14 @@ const Login = () => {
     try {
       const result = await loginWithGoogle();
       if (result.success) {
-        navigate(from, { replace: true });
+        // Redirect based on user role
+        if (result.user.role === 'vendor') {
+          navigate('/vendor/dashboard', { replace: true });
+        } else if (result.user.role === 'admin') {
+          navigate('/admin', { replace: true });
+        } else {
+          navigate('/dashboard', { replace: true });
+        }
       }
     } catch (error) {
       console.error('Google login error:', error);
